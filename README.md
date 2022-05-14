@@ -48,8 +48,6 @@
 
 > sequelize npm (Mysql node express connection documentation) : https://www.npmjs.com/package/sequelize
 
->
-
 ## Other Resource Documentations
 
 > Node.js Rest APIs example with Express, Sequelize & MySQL : https://www.bezkoder.com/node-js-express-sequelize-mysql/
