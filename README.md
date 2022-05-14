@@ -37,11 +37,11 @@
 
 ## backend > config > db.config.js (Config ur mysql connection before starting backend)
 
-> HOST: host name
+> HOST: ur host name
 
-> USER: user name
+> USER: ur user name
 
-> PASSWORD: password
+> PASSWORD: ur password
 
 > DB: create a db name "test" in ur my-sql environment
 
