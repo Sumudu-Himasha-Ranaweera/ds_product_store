@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect , useState} from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
@@ -53,6 +53,16 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    try {
+      setUser(JSON.parse(localStorage.getItem("profile")));
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   const renderContent = (
     <Scrollbar
       sx={{
@@ -77,7 +87,8 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             <Avatar src={account.photoURL} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
+                {/* {account.displayName} */}
+                {user != null ? user?.result.name : "Currently No User Available"}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                 {account.role}
@@ -115,6 +126,8 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       </Box> */}
     </Scrollbar>
   );
+
+
 
   return (
     <RootStyle>

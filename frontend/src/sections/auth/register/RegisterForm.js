@@ -1,17 +1,22 @@
-import * as Yup from 'yup';
-import { useState } from 'react';
-import { useFormik, Form, FormikProvider } from 'formik';
-import { useNavigate } from 'react-router-dom';
-// material
-import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+// material
+import { IconButton, InputAdornment, Stack, TextField } from '@mui/material';
+import { Form, FormikProvider, useFormik } from 'formik';
+import { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+import { signUp } from '../../../actions/auth';
 // component
 import Iconify from '../../../components/Iconify';
+
 
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -20,6 +25,7 @@ export default function RegisterForm() {
     lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     password: Yup.string().required('Password is required'),
+    confirmPassword: Yup.string().required('Confirm Password is required'),
   });
 
   const formik = useFormik({
@@ -28,10 +34,11 @@ export default function RegisterForm() {
       lastName: '',
       email: '',
       password: '',
+      confirmPassword: ''
     },
     validationSchema: RegisterSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit: (data) => {
+      dispatch(signUp(data, navigate));
     },
   });
 
@@ -86,6 +93,25 @@ export default function RegisterForm() {
             }}
             error={Boolean(touched.password && errors.password)}
             helperText={touched.password && errors.password}
+          />
+
+          <TextField
+            fullWidth
+            autoComplete="current-confirmPassword"
+            type={showPassword ? 'text' : 'password'}
+            label="Confirm Password"
+            {...getFieldProps('confirmPassword')}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
+                    <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            error={Boolean(touched.confirmPassword && errors.confirmPassword)}
+            helperText={touched.confirmPassword && errors.confirmPassword}
           />
 
           <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>

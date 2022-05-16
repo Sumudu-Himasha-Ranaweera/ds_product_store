@@ -1,16 +1,20 @@
-import * as Yup from 'yup';
-import { useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useFormik, Form, FormikProvider } from 'formik';
-// material
-import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+// material
+import { Checkbox, FormControlLabel, IconButton, InputAdornment, Link, Stack, TextField } from '@mui/material';
+import { Form, FormikProvider, useFormik } from 'formik';
+import { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+import { signIn } from "../../../actions/auth";
 // component
 import Iconify from '../../../components/Iconify';
+
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -27,8 +31,9 @@ export default function LoginForm() {
       remember: true,
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit: (data) => {
+      console.log("test login click")
+      dispatch(signIn(data, navigate));
     },
   });
 

@@ -5,16 +5,16 @@ import db from "./models/index.js"
 import tutorialRoutes from "./routes/tutorial.routes.js"
 import userRoutes from "./routes/user.routes.js"
 
+// var corsOptions = {
+//     origin: "http://localhost:8081"
+// };
 
 const app = express();
 
-var corsOptions = {
-    origin: "http://localhost:8081"
-};
-
-app.use(cors(corsOptions))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(cors())
+
 
 // // route
 app.get('/', (req, res) => {
