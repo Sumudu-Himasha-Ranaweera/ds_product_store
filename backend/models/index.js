@@ -2,6 +2,8 @@ import { dbConfig } from "../config/db.config.js";
 import Sequelize from "sequelize";
 
 import { TutorialModal } from "./tutorial.modal.js";
+import { UserModal } from "./user.model.js";
+
 
 const sequelize = new Sequelize(
     dbConfig.DB,
@@ -25,5 +27,6 @@ db.sequelize = sequelize;
 
 
 db.tutorials = TutorialModal(sequelize, Sequelize);
+db.users = UserModal(sequelize, Sequelize);
 
 export default db;

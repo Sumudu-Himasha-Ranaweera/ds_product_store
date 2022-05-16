@@ -3,6 +3,7 @@ import cors from 'cors'
 import db from "./models/index.js"
 
 import tutorialRoutes from "./routes/tutorial.routes.js"
+import userRoutes from "./routes/user.routes.js"
 
 
 const app = express();
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
     res.json({ message: "Welcome to Farm Portal Server" })
 })
 app.use('/tutorial', tutorialRoutes);
+app.use('/user', userRoutes);
 
 db.sequelize.sync();
 // db.sequelize.sync({ force: true }).then(() => {
