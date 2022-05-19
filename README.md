@@ -34,8 +34,13 @@
 
 ```
 
-
 ## backend > config > db.config.js (Config ur mysql connection before starting backend)
+
+```sql
+
+> CREATE SCHEMA `farmerportal` ;
+
+```
 
 > HOST: ur host name
 
@@ -43,7 +48,7 @@
 
 > PASSWORD: ur password
 
-> DB: create a db name "test" in ur my-sql environment
+> DB: create a db name "farmerportal" in ur my-sql environment
 
 ###### below configurations default
 
@@ -56,7 +61,6 @@
 > acquire: 30000,
 
 > idle: 10000
-
 
 ## Resources
 
