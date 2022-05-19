@@ -10,10 +10,24 @@ import NotFound from './pages/Page404';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
+import { useState, useEffect } from 'react';
 
 // ----------------------------------------------------------------------
 
 export default function Router() {
+
+  const [userData, setUserData] = useState(null)
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('profile'));
+    if (data) {
+      setUserData(data);
+    }
+
+  }, [])
+
+  console.log(userData?.result)
+
   return useRoutes([
     {
       path: '/dashboard',
