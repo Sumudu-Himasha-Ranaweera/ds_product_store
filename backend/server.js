@@ -5,6 +5,7 @@ import db from "./models/index.js"
 import tutorialRoutes from "./routes/tutorial.routes.js"
 import userRoutes from "./routes/user.routes.js"
 import itemRoutes from "./routes/item.routes.js"
+import paymentRoutes from "./routes/payment.routes.js"
 
 // var corsOptions = {
 //     origin: "http://localhost:8081"
@@ -24,6 +25,8 @@ app.get('/', (req, res) => {
 app.use('/tutorial', tutorialRoutes);
 app.use('/user', userRoutes);
 app.use('/item', itemRoutes);
+app.use('/payment', paymentRoutes);
+
 
 db.sequelize.sync();
 // db.sequelize.sync({ force: true }).then(() => {
