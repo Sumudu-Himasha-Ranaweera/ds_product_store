@@ -36,12 +36,6 @@
 
 ## backend > config > db.config.js (Config ur mysql connection before starting backend)
 
-```sql
-
-> CREATE SCHEMA `farmerportal` ;
-
-```
-
 > HOST: ur host name
 
 > USER: ur user name
@@ -49,6 +43,12 @@
 > PASSWORD: ur password
 
 > DB: create a db name "farmerportal" in ur my-sql environment
+
+```sql
+
+> CREATE SCHEMA `farmerportal` ;
+
+```
 
 ###### below configurations default
 
