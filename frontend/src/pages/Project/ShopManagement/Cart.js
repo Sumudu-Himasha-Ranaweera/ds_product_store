@@ -4,7 +4,7 @@ import {
     TablePagination, TableRow, Typography
 } from '@mui/material';
 import { filter } from 'lodash';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
 import Iconify from '../../../components/Iconify';
@@ -217,3 +217,4 @@ export default function Cart({ cart, setCart }) {
         </Page>
     );
 }
+
