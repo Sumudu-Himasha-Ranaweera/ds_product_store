@@ -50,6 +50,8 @@
 
 ```
 
+> and use the Dump Folder in the project to restore the data
+
 ###### below configurations default
 
 > dialect: "mysql",
