@@ -11,22 +11,14 @@ import Register from './pages/Register';
 import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
 import { useState, useEffect } from 'react';
+import Item from './pages/Item';
+import ItemCreate from './pages/ItemCreate';
+import ItemUpdate from './pages/ItemUpdate';
+
 
 // ----------------------------------------------------------------------
 
 export default function Router() {
-
-  const [userData, setUserData] = useState(null)
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('profile'));
-    if (data) {
-      setUserData(data);
-    }
-
-  }, [])
-
-  console.log(userData?.result)
 
   return useRoutes([
     {
@@ -35,6 +27,9 @@ export default function Router() {
       children: [
         { path: 'app', element: <DashboardApp /> },
         { path: 'user', element: <User /> },
+        { path: 'item', element: <Item /> },
+        { path: 'item-create', element: <ItemCreate /> },
+        { path: 'item-update/:id', element: <ItemUpdate /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
       ],
