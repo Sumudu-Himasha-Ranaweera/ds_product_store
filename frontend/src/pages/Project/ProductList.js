@@ -6,17 +6,15 @@ import {
 import { filter } from 'lodash';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { getItems } from "../actions/item.action";
-import Iconify from '../components/Iconify';
-// components
-import Page from '../components/Page';
-import Scrollbar from '../components/Scrollbar';
-import SearchNotFound from '../components/SearchNotFound';
-import { ItemListHead, ItemListToolbar, ItemMoreMenu } from '../sections/@dashboard/item';
+import { getItems } from "../../actions/item.action";
+import Page from '../../components/Page';
+import Scrollbar from '../../components/Scrollbar';
+import SearchNotFound from '../../components/SearchNotFound';
+import { ItemListHead, ItemMoreMenu } from '../../sections/@dashboard/item';
+import { ProductCartWidget } from '../../sections/@dashboard/products';
 
 
-const TABLE_HEAD = [ 
+const TABLE_HEAD = [
 
     { id: 'name', label: 'Name', alignRight: false },
     { id: 'description', label: 'Description', alignRight: false },
@@ -24,7 +22,7 @@ const TABLE_HEAD = [
     { id: 'price', label: 'price', alignRight: false },
 ];
 
- 
+
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -55,7 +53,7 @@ function applySortFilter(array, comparator, query) {
     return stabilizedThis.map((el) => el[0]);
 }
 
-export default function Item() {
+export default function ProductList({handleClickCartButton}) {
 
     const dispatch = useDispatch();
 
@@ -130,22 +128,23 @@ export default function Item() {
 
     const isUserNotFound = filteredUsers.length === 0;
 
+
     return (
-        <Page title="Item">
+        <Page title="Product-List">
             <Container>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                     <Typography variant="h4" gutterBottom>
-                        Item
+                        Product List
                     </Typography>
-                    <Link to={"/dashboard/item-create"} style={{ textDecoration: "none" }}>
+                    {/* <Link to={"/dashboard/item-create"} style={{ textDecoration: "none" }}>
                         <Button variant="contained" to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
                             New Item
                         </Button>
-                    </Link>
+                    </Link> */}
                 </Stack>
 
                 <Card>
-                    <ItemListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
+                    {/* <ItemListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} /> */}
 
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
@@ -196,6 +195,12 @@ export default function Item() {
                                                         {sentenceCase(status)}
                                                     </Label>
                                                 </TableCell> */}
+                                                <TableCell align="right">
+
+                                                    <Button onClick={() => handleClickCartButton(row)} variant="outlined">Add to Cart</Button>
+
+                                                </TableCell>
+
 
                                                 <TableCell align="right">
                                                     <ItemMoreMenu row={row} />
@@ -233,6 +238,7 @@ export default function Item() {
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </Card>
+                <ProductCartWidget />
             </Container>
         </Page>
     );

@@ -45,6 +45,13 @@ export default function ItemMoreMenu(props) {
             <ListItemText primary="Edit" primaryTypographyProps={{ variant: 'body2' }} />
           </MenuItem>
         </Link>
+
+        <MenuItem to="#" sx={{ color: 'text.secondary' }}  >
+          <ListItemIcon>
+            <Iconify icon="eva:shopping-cart-fill" width={24} height={24} />
+          </ListItemIcon>
+          <ListItemText primary="Add to Cart" primaryTypographyProps={{ variant: 'body2' }} />
+        </MenuItem>
       </Menu>
     </>
   );

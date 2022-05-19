@@ -2,12 +2,13 @@ import { LoadingButton } from '@mui/lab';
 import { Stack, TextField } from '@mui/material';
 import { Form, FormikProvider, useFormik } from 'formik';
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { updateItem } from "../../actions/item.action";
+import { createItem } from "../../../../actions/item.action";
+import { toast } from "react-toastify";
 
-export default function ItemUpdateForm(props) {
+export default function PaymentForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,18 +21,6 @@ export default function ItemUpdateForm(props) {
     }
   }, []);
 
-  const [itemData, setItemData] = useState(null);
-
-  const [currentId, setCurrentId] = useState(5)
-
-  const itemFormData = useSelector((state) => (currentId ? state.itemReducer.find((data) => data.id === currentId) : null));
-
-  console.log(itemFormData)
-  useEffect(() => {
-    if (itemFormData) setItemData(itemFormData);
-  }, [itemFormData]);
-
-  console.log(itemData)
 
   const ItemSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
@@ -42,11 +31,17 @@ export default function ItemUpdateForm(props) {
 
 
   const formik = useFormik({
-    initialValues: itemData == null ? console.log("test") : console.log("test1"),
+    initialValues: {
+      name: '',
+      qty: '',
+      price: '',
+      description: '',
+    },
     validationSchema: ItemSchema,
     onSubmit: (data) => {
       console.log("test item form submit click")
-      dispatch(updateItem(currentId, data));
+      data.traderId = userData?.result?.traderId
+      dispatch(createItem(data, navigate));
     },
   });
 

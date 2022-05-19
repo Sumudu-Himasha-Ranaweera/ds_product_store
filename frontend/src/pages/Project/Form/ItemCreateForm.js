@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { createItem } from "../../actions/item.action";
+import { createItem } from "../../../actions/item.action";
 import { toast } from "react-toastify";
 
 export default function ItemCreateForm() {

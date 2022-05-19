@@ -3,8 +3,8 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useParams } from 'react-router-dom';
-import Page from '../components/Page';
-import Scrollbar from '../components/Scrollbar';
+import Page from '../../../components/Page';
+import Scrollbar from '../../../components/Scrollbar';
 import { ItemUpdateForm } from './Form';
 import { useState } from 'react';
 
@@ -33,11 +33,7 @@ export default function ItemUpdate() {
                 <Card>
                     <Scrollbar>
                         <Container maxWidth="md">
-                            <ContentStyle>
-                                <Typography variant="h4" gutterBottom>
-                                    Create Item
-                                </Typography>
-
+                            <ContentStyle>  
                                 <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter Item details below.</Typography>
 
                                 <ItemUpdateForm currentID={idd} />

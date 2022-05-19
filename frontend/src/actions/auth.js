@@ -1,5 +1,5 @@
-import { Navigate } from 'react-router-dom';
 import * as api from '../api';
+import { FETCH_ALL } from '../constants/actionTypes.constants';
 
 export const signIn = (formData, navigate) => async (dispatch) => {
     try {
@@ -29,3 +29,14 @@ export const signUp = (formData, navigate) => async (dispatch) => {
         console.log(error.message)
     }
 }
+
+
+export const getUsers = () => async (dispatch) => {
+    try {
+        const { data } = await api.fetchUsers();
+
+        dispatch({ type: FETCH_ALL, payload: data });
+    } catch (error) {
+        console.log(error.message);
+    }
+};

@@ -1,4 +1,7 @@
-const authReducer = (state = { authData: null }, action) => {
+
+import { FETCH_ALL } from '../constants/actionTypes.constants';
+
+const authReducer = (state = { authData: null, users: [] }, action) => {
     switch (action.type) {
         case 'AUTH':
             console.log("came")
@@ -9,7 +12,8 @@ const authReducer = (state = { authData: null }, action) => {
             localStorage.clear()
 
             return { ...state, authData: null }
-
+        case FETCH_ALL:
+            return {...state, authData: null, users: action.payload}
         default:
             return state;
     }
