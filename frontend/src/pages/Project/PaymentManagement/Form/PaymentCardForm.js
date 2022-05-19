@@ -5,10 +5,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { createItem } from "../../../../actions/item.action";
-import { toast } from "react-toastify";
 
-export default function PaymentForm() {
+export default function PaymentCardForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,25 +21,26 @@ export default function PaymentForm() {
 
 
   const ItemSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    qty: Yup.string().required('Quantity is required'),
-    price: Yup.string().required('Price is required'),
-    description: Yup.string().required('Description is required'),
+    cardNumber: Yup.string().required('Card Number is required'),
+    cardholdersName: Yup.string().required('Card Holders Name is required'),
+    cardExpiryDate: Yup.string().required('Expiry Date is required'),
+    cardCvv: Yup.string().required('CVV is required'),
   });
 
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      qty: '',
-      price: '',
-      description: '',
+      cardNumber: '',
+      cardholdersName: '',
+      cardExpiryDate: '',
+      cardCvv: '',
     },
     validationSchema: ItemSchema,
     onSubmit: (data) => {
       console.log("test item form submit click")
-      data.traderId = userData?.result?.traderId
-      dispatch(createItem(data, navigate));
+      console.log(data)
+      // data.traderId = userData?.result?.traderId
+      // dispatch(createItem(data, navigate));
     },
   });
 
@@ -52,38 +51,36 @@ export default function PaymentForm() {
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-            <TextField
-              fullWidth
-              label="Item name"
-              {...getFieldProps('name')}
-              error={Boolean(touched.name && errors.name)}
-              helperText={touched.name && errors.name}
-            />
-            <TextField
-              fullWidth
-              label="Item Quantity"
-              {...getFieldProps('qty')}
-              error={Boolean(touched.qty && errors.qty)}
-              helperText={touched.qty && errors.qty}
-            />
-            <TextField
-              fullWidth
-              label="Item Price"
-              {...getFieldProps('price')}
-              error={Boolean(touched.price && errors.price)}
-              helperText={touched.price && errors.price}
-            />
-          </Stack>
           <TextField
             fullWidth
-            multiline
-            rows={4}
-            label="Description"
-            {...getFieldProps('description')}
-            error={Boolean(touched.description && errors.description)}
-            helperText={touched.description && errors.description}
-          />
+            label="Card Number"
+            {...getFieldProps('cardNumber')}
+            error={Boolean(touched.cardNumber && errors.cardNumber)}
+            helperText={touched.cardNumber && errors.cardNumber}
+          /> 
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+          <TextField
+              fullWidth
+              label="Card Holders Name"
+              {...getFieldProps('cardholdersName')}
+              error={Boolean(touched.cardholdersName && errors.cardholdersName)}
+              helperText={touched.cardholdersName && errors.cardholdersName}
+            />
+            <TextField
+              fullWidth
+              label="Card expiry Date"
+              {...getFieldProps('cardExpiryDate')}
+              error={Boolean(touched.cardExpiryDate && errors.cardExpiryDate)}
+              helperText={touched.cardExpiryDate && errors.cardExpiryDate}
+            />
+            <TextField
+              fullWidth
+              label="CVV"
+              {...getFieldProps('cardCvv')}
+              error={Boolean(touched.cardCvv && errors.cardCvv)}
+              helperText={touched.cardCvv && errors.cardCvv}
+            />
+          </Stack>
         </Stack>
 
         <div style={{ display: "flex", direction: "row", marginTop: "2%" }}>
@@ -91,7 +88,7 @@ export default function PaymentForm() {
             Cancel
           </LoadingButton>
           <LoadingButton style={{ margin: "2%" }} fullWidth size="large" type="submit" variant="contained" >
-            Save
+            Pay
           </LoadingButton>
         </div>
 
