@@ -40,3 +40,18 @@ export const getUsers = () => async (dispatch) => {
         console.log(error.message);
     }
 };
+
+export const addToLocalStorage = (cartData, total) => async (dispatch) => {
+    try {
+        //log in user...
+        const data = {
+            cartData,
+            total
+        }
+
+        dispatch({ type: 'ADDLOCALSTORAGE', data }) 
+        // navigate('/')
+    } catch (error) {
+        console.log(error.message)
+    }
+}

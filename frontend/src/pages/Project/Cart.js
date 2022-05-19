@@ -4,7 +4,7 @@ import {
     TablePagination, TableRow, Typography
 } from '@mui/material';
 import { filter } from 'lodash';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
 import Iconify from '../../components/Iconify';
@@ -13,6 +13,7 @@ import Scrollbar from '../../components/Scrollbar';
 import SearchNotFound from '../../components/SearchNotFound';
 import { ItemListHead } from '../../sections/@dashboard/item';
 
+import { addToLocalStorage } from '../../actions/auth';
 
 const TABLE_HEAD = [
     { id: 'name', label: 'Name', alignRight: false },
@@ -168,6 +169,14 @@ export default function Cart({ cart, setCart }) {
                                             </TableRow>
                                         );
                                     })}
+
+                                    {
+
+                                        // useEffect(() => {
+                                        //     dispatch(addToLocalStorage(cart, total))
+                                        // }, []) 
+
+                                    }
                                     {emptyRows > 0 && (
                                         <TableRow style={{ height: 53 * emptyRows }}>
                                             <TableCell colSpan={6} />

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import { createPayment} from "../../../../actions/payment.action"
 
 export default function PaymentPhoneForm() {
   const dispatch = useDispatch();
@@ -32,9 +33,14 @@ export default function PaymentPhoneForm() {
     validationSchema: ItemSchema,
     onSubmit: (data) => {
       console.log("test item form submit click")
+
+
+      data.paymentType = "phone"
+      data.buyerId = userData?.result?.buyerId
+
       console.log(data)
-      // data.traderId = userData?.result?.traderId
-      // dispatch(createItem(data, navigate));
+
+      dispatch(createPayment(data));
     },
   });
 

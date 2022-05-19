@@ -13,7 +13,13 @@ const authReducer = (state = { authData: null, users: [] }, action) => {
 
             return { ...state, authData: null }
         case FETCH_ALL:
-            return {...state, authData: null, users: action.payload}
+            return { ...state, authData: null, users: action.payload }
+
+        case 'ADDLOCALSTORAGE':
+            console.log("came")
+            localStorage.setItem('cartData', JSON.stringify({ ...action?.data }))
+
+            return state
         default:
             return state;
     }
