@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import { createPayment } from "../../../../actions/payment.action"
 
 export default function PaymentCardForm() {
   const dispatch = useDispatch();
@@ -38,9 +39,14 @@ export default function PaymentCardForm() {
     validationSchema: ItemSchema,
     onSubmit: (data) => {
       console.log("test item form submit click")
+
+
+      data.paymentType = "card"
+      data.buyerId = userData?.result?.buyerId
+
       console.log(data)
-      // data.traderId = userData?.result?.traderId
-      // dispatch(createItem(data, navigate));
+
+      dispatch(createPayment(data));
     },
   });
 
@@ -57,9 +63,9 @@ export default function PaymentCardForm() {
             {...getFieldProps('cardNumber')}
             error={Boolean(touched.cardNumber && errors.cardNumber)}
             helperText={touched.cardNumber && errors.cardNumber}
-          /> 
+          />
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-          <TextField
+            <TextField
               fullWidth
               label="Card Holders Name"
               {...getFieldProps('cardholdersName')}
