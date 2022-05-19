@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken'
 import db from "../models/index.js"
 
 const User = db.users;
+const Trader = db.trader;
+const Buyer = db.buyer;
 
 export const signIn = async (req, res) => {
     const { email, password } = req.body;
@@ -28,7 +30,7 @@ export const signIn = async (req, res) => {
 
 
 export const signUp = async (req, res) => {
-    const { firstName, lastName, email, password, confirmPassword } = req.body;
+    const { firstName, lastName, email, password, confirmPassword, type } = req.body;
 
     try {
         const existingUser = await User.findOne({ where: { email: email } });
@@ -39,11 +41,43 @@ export const signUp = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 12)
 
-        const result = await User.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` })
+        if (type != null) {
+            switch (type) {
+                case "buyer":
+                    const buyerResult = await Buyer.create({ email, name: `${firstName} ${lastName}` })
 
-        const token = jwt.sign({ email: result.email, id: result._id }, 'test', { expiresIn: "1h" })
+                    // console.log("check here ---------------------------------------------")
+                    // console.log(buyerResult)
 
-        res.status(200).json({ result: result, token })
+                    const userResultBuyer = await User.create({ email, password: hashedPassword, name: `${firstName} ${lastName}`, type: type, buyerId: buyerResult.id })
+
+                    const tokenBuyer = jwt.sign({ email: userResultBuyer.email, id: userResultBuyer._id }, 'test', { expiresIn: "1h" })
+
+                    res.status(200).json({ result: userResultBuyer, tokenBuyer })
+                    break;
+
+                case "trader":
+                    const traderResult = await Trader.create({ email, name: `${firstName} ${lastName}` })
+
+                    const userResultTrader = await User.create({ email, password: hashedPassword, name: `${firstName} ${lastName}`, type: type, traderId: traderResult.id })
+
+                    const tokenTrader = jwt.sign({ email: userResultTrader.email, id: userResultTrader._id }, 'test', { expiresIn: "1h" })
+
+                    res.status(200).json({ result: userResultTrader, tokenTrader })
+                    break;
+
+                default:
+                    break;
+            }
+        } else {
+            return res.status(400).json({ message: "type Can not be null" })
+        }
+
+        // const result = await User.create({ email, password: hashedPassword, name: `${firstName} ${lastName}`, type: type })
+
+        // const token = jwt.sign({ email: result.email, id: result._id }, 'test', { expiresIn: "1h" })
+
+        // res.status(200).json({ result: result, token })
 
     } catch (error) {
         res.status(500).json({ message: "Something went wrong" })

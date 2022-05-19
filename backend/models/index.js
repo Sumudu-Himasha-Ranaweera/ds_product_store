@@ -3,7 +3,8 @@ import Sequelize from "sequelize";
 
 import { TutorialModal } from "./tutorial.modal.js";
 import { UserModal } from "./user.model.js";
-
+import { BuyerModal } from "./buyer.model.js";
+import { TraderModal } from "./trader.model.js";
 
 const sequelize = new Sequelize(
     dbConfig.DB,
@@ -28,5 +29,19 @@ db.sequelize = sequelize;
 
 db.tutorials = TutorialModal(sequelize, Sequelize);
 db.users = UserModal(sequelize, Sequelize);
+db.trader = TraderModal(sequelize, Sequelize)
+db.buyer = BuyerModal(sequelize, Sequelize)
+
+db.trader.hasMany(db.users, { as: "users" });
+db.users.belongsTo(db.trader, {
+    foreignKey: "traderId",
+    as: "trader",
+});
+db.buyer.hasMany(db.users, { as: "users" });
+db.users.belongsTo(db.buyer, {
+    foreignKey: "buyerId",
+    as: "buyer",
+});
+
 
 export default db;

@@ -9,6 +9,9 @@ export const UserModal = (sequelize, Sequelize) => {
         password: {
             type: Sequelize.STRING,
         },
+        type: {
+            type: Sequelize.STRING
+        }
     });
     return User;
 } 

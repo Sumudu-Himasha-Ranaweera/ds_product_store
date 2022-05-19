@@ -1,6 +1,6 @@
 import { LoadingButton } from '@mui/lab';
 // material
-import { IconButton, InputAdornment, Stack, TextField } from '@mui/material';
+import { IconButton, InputAdornment, MenuItem, Stack, TextField } from '@mui/material';
 import { Form, FormikProvider, useFormik } from 'formik';
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
@@ -26,6 +26,7 @@ export default function RegisterForm() {
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     password: Yup.string().required('Password is required'),
     confirmPassword: Yup.string().required('Confirm Password is required'),
+    type: Yup.string().required('User Type is required'),
   });
 
   const formik = useFormik({
@@ -34,7 +35,8 @@ export default function RegisterForm() {
       lastName: '',
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      type: ''
     },
     validationSchema: RegisterSchema,
     onSubmit: (data) => {
@@ -48,6 +50,22 @@ export default function RegisterForm() {
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
+          <TextField
+            fullWidth
+            select
+            label="User Type"
+            {...getFieldProps('type')}
+            error={Boolean(touched.type && errors.type)}
+            helperText={touched.type && errors.type}
+          >
+            <MenuItem key={1} value={"buyer"}>
+              Buyer
+            </MenuItem>
+            <MenuItem key={2} value={"trader"}>
+              Trader
+            </MenuItem>
+          </TextField>
+
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
             <TextField
               fullWidth
@@ -56,7 +74,6 @@ export default function RegisterForm() {
               error={Boolean(touched.firstName && errors.firstName)}
               helperText={touched.firstName && errors.firstName}
             />
-
             <TextField
               fullWidth
               label="Last name"
