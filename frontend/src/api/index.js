@@ -12,7 +12,7 @@ export const fetchUsers = () => API.get(`/user`);
 export const fetchItems = () => API.get(`/item`);
 export const createItem = (newItem) => API.post(`/item`, newItem);
 export const deleteItem = (id) => API.delete(`/item/${id}`);
-export const updateItem = (id, updateItem) => API.patch(`/item/${id}`, updateItem);
+export const updateItem = (id, updateItem) => API.put(`/item/${id}`, updateItem);
 
 
 export const fetchPayments = () => API.get(`/payment`);

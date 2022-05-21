@@ -8,6 +8,19 @@ import * as Yup from 'yup';
 import { updateItem } from "../../../../actions/item.action";
 
 export default function ItemUpdateForm(props) {
+  const {
+    items,
+    itemData,
+    setItemData,
+    handleSubmitForm,
+    clear,
+    currentId,
+    setCurrentId,
+    value,
+    setValue,
+    notify
+  } = props;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,18 +33,18 @@ export default function ItemUpdateForm(props) {
     }
   }, []);
 
-  const [itemData, setItemData] = useState(null);
+  // const [itemData, setItemData] = useState(null);
 
-  const [currentId, setCurrentId] = useState(5)
+  // const [currentId, setCurrentId] = useState(5)
 
-  const itemFormData = useSelector((state) => (currentId ? state.itemReducer.find((data) => data.id === currentId) : null));
+  // const itemFormData = useSelector((state) => (currentId ? state.itemReducer.find((data) => data.id === currentId) : null));
 
-  console.log(itemFormData)
-  useEffect(() => {
-    if (itemFormData) setItemData(itemFormData);
-  }, [itemFormData]);
+  // console.log(itemFormData)
+  // useEffect(() => {
+  //   if (itemFormData) setItemData(itemFormData);
+  // }, [itemFormData]);
 
-  console.log(itemData)
+  // console.log(itemData)
 
   const ItemSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
@@ -42,13 +55,23 @@ export default function ItemUpdateForm(props) {
 
 
   const formik = useFormik({
-    initialValues: itemData == null ? console.log("test") : console.log("test1"),
+    initialValues: itemData,
     validationSchema: ItemSchema,
-    onSubmit: (data) => {
-      console.log("test item form submit click")
+    onSubmit: (data, { resetForm }) => {
+      // console.log("test item form submit click")
       dispatch(updateItem(currentId, data));
+      notify()
+      resetForm()
+      setCurrentId(0)
+      clear()
+      setValue(0)
+      // handleSubmitForm()
+
     },
   });
+
+  const itemStates = useSelector((state) => state.itemReducer);
+  console.log(itemStates)
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
 

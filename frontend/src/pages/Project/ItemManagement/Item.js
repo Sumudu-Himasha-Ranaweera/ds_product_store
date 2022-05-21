@@ -54,19 +54,31 @@ function applySortFilter(array, comparator, query) {
     return stabilizedThis.map((el) => el[0]);
 }
 
-export default function Item() {
+export default function Item(props) {
 
-    const dispatch = useDispatch();
+    const {
+        items,
+        itemData,
+        setItemData,
+        handleSubmit,
+        clear,
+        currentId,
+        setCurrentId,
+        value,
+        setValue
+    } = props;
 
-    useEffect(() => {
-        try {
-            dispatch(getItems());
-        } catch (error) {
-            console.log(error);
-        }
-    }, []);
+    // const dispatch = useDispatch();
 
-    const items = useSelector((state) => state.itemReducer);
+    // useEffect(() => {
+    //     try {
+    //         dispatch(getItems());
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }, []);
+
+    // const items = useSelector((state) => state.itemReducer);
 
     const [page, setPage] = useState(0);
 
@@ -197,7 +209,18 @@ export default function Item() {
                                                 </TableCell> */}
 
                                                 <TableCell align="right">
-                                                    <ItemMoreMenu row={row} />
+                                                    <ItemMoreMenu
+                                                        row={row}
+                                                        items={items}
+                                                        itemData={itemData}
+                                                        setItemData={setItemData}
+                                                        handleSubmit={handleSubmit}
+                                                        clear={clear}
+                                                        currentId={currentId}
+                                                        setCurrentId={setCurrentId}
+                                                        value={value}
+                                                        setValue={setValue}
+                                                    />
                                                 </TableCell>
                                             </TableRow>
                                         );

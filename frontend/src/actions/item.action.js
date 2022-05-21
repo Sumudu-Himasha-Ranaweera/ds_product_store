@@ -12,13 +12,13 @@ export const getItems = () => async (dispatch) => {
     }
 };
 
-export const createItem = (Item, navigate) => async (dispatch) => {
+export const createItem = (Item) => async (dispatch) => {
     try {
         const { data } = await api.createItem(Item);
 
         dispatch({ type: CREATE, payload: data });
 
-        navigate('/dashboard/item', { replace: true });
+        // navigate('/dashboard/item', { replace: true });
     } catch (error) {
         console.log(error.message);
     }

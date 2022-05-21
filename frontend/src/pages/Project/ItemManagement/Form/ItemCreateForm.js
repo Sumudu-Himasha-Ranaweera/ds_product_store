@@ -8,7 +8,21 @@ import * as Yup from 'yup';
 import { createItem } from "../../../../actions/item.action";
 import { toast } from "react-toastify";
 
-export default function ItemCreateForm() {
+export default function ItemCreateForm(props) {
+
+  const {
+    items,
+    itemData,
+    setItemData,
+    handleSubmitForm,
+    clear,
+    currentId,
+    setCurrentId,
+    value,
+    setValue,
+    notify
+  } = props
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,10 +52,12 @@ export default function ItemCreateForm() {
       description: '',
     },
     validationSchema: ItemSchema,
-    onSubmit: (data) => {
+    onSubmit: (data, { resetForm }) => {
       console.log("test item form submit click")
       data.traderId = userData?.result?.traderId
-      dispatch(createItem(data, navigate));
+      dispatch(createItem(data));
+      notify()
+      resetForm()
     },
   });
 

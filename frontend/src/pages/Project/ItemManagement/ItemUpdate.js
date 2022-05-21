@@ -8,19 +8,33 @@ import Scrollbar from '../../../components/Scrollbar';
 import { ItemUpdateForm } from './Form';
 import { useState } from 'react';
 
+
 const ContentStyle = styled('div')(({ theme }) => ({
     margin: '5vh 0',
     display: 'flex',
     flexDirection: 'column',
 }));
 
-export default function ItemUpdate() {
+export default function ItemUpdate(props) {
 
-    const { id } = useParams();
+    const {
+        items,
+        itemData,
+        setItemData,
+        handleSubmit,
+        clear,
+        currentId,
+        setCurrentId,
+        value,
+        setValue,
+        notify
+    } = props;
 
-    console.log(id)
+    // const { id } = useParams();
 
-    const [idd, setIdd] = useState(id ? id : 5)
+    // console.log(id)
+
+    // const [idd, setIdd] = useState(id ? id : 5) 
 
     return (
         <Page title="Item">
@@ -33,10 +47,21 @@ export default function ItemUpdate() {
                 <Card>
                     <Scrollbar>
                         <Container maxWidth="md">
-                            <ContentStyle>  
+                            <ContentStyle>
                                 <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter Item details below.</Typography>
 
-                                <ItemUpdateForm currentID={idd} />
+                                <ItemUpdateForm
+                                    items={items}
+                                    itemData={itemData}
+                                    setItemData={setItemData}
+                                    handleSubmitForm={handleSubmit}
+                                    clear={clear}
+                                    currentId={currentId}
+                                    setCurrentId={setCurrentId}
+                                    value={value}
+                                    setValue={setValue}
+                                    notify={notify}
+                                />
                             </ContentStyle>
                         </Container>
                     </Scrollbar>
