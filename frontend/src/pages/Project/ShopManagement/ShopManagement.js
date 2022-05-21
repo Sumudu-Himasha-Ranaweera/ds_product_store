@@ -53,7 +53,8 @@ export default function ShopManagement() {
 
     const handleClickCartButton = (item) => {
         cart.push(item)
-        console.log(cart)
+        // console.log(cart)
+        // console.log("test" + cart.length)
     }
 
     return (
@@ -67,10 +68,10 @@ export default function ShopManagement() {
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
-                    <Products />
+                    <Products setValue={setValue} value={value} cart={cart} setCart={setCart} />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <ProductList handleClickCartButton={handleClickCartButton} />
+                    <ProductList setValue={setValue} value={value} cart={cart} setCart={setCart} handleClickCartButton={handleClickCartButton} />
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     <Cart cart={cart} setCart={setCart} />

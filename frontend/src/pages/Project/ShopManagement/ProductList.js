@@ -53,7 +53,13 @@ function applySortFilter(array, comparator, query) {
     return stabilizedThis.map((el) => el[0]);
 }
 
-export default function ProductList({handleClickCartButton}) {
+export default function ProductList(props) {
+
+    const {
+        handleClickCartButton,
+        value,
+        setValue
+    } = props
 
     const dispatch = useDispatch();
 
@@ -238,7 +244,7 @@ export default function ProductList({handleClickCartButton}) {
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </Card>
-                <ProductCartWidget />
+                <ProductCartWidget setValue={setValue} value={value} />
             </Container>
         </Page>
     );

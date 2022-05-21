@@ -8,7 +8,15 @@ import Page from '../../../components/Page';
 import { ProductCartWidget, ProductFilterSidebar, ProductList, ProductSort } from '../../../sections/@dashboard/products';
 import PRODUCTS from '../../../_mock/products';
 
-export default function EcommerceShop() {
+export default function EcommerceShop(props) {
+
+  const {
+    setValue,
+    value,
+    cart,
+    setCart
+  } = props
+
   const [openFilter, setOpenFilter] = useState(false);
 
   const dispatch = useDispatch();
@@ -47,8 +55,8 @@ export default function EcommerceShop() {
     };
   });
 
-  console.log(products)
-  console.log(PRODUCTS)
+  // console.log(products)
+  // console.log(PRODUCTS)
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -77,7 +85,7 @@ export default function EcommerceShop() {
         </Stack>
 
         <ProductList products={products} />
-        <ProductCartWidget />
+        <ProductCartWidget setValue={setValue} value={value} cart={cart} setCart={setCart} />
       </Container>
     </Page>
   );
