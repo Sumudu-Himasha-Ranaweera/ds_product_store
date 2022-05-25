@@ -2,8 +2,7 @@ import express from "express";
 import { create, findAll, findOne, update, deleteOne, deleteAll, findAllPublished } from "../controllers/tutorial.controller.js";
 import auth from "../middleware/auth.middleware.js"
 
-const router = express.Router();
-
+const router = express.Router(); 
 
 router.post('/', auth, create);
 router.get('/', findAll);

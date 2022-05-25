@@ -93,12 +93,12 @@ export default function ItemManagement() {
 
     const clear = () => {
         setCurrentId(0);
-        setItemData({  
+        setItemData({
             name: '',
             qty: '',
             price: '',
             description: '',
-         });
+        });
     };
 
     const handleSubmit = async (e) => {
