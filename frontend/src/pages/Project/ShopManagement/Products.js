@@ -54,6 +54,14 @@ export default function EcommerceShop(props) {
         (setIndex === 6 && PRODUCT_COLOR.slice(5, 7)) ||
         (setIndex === 7 && PRODUCT_COLOR.slice(6, 8)) ||
         (setIndex === 8 && PRODUCT_COLOR.slice(7, 9)) ||
+        (setIndex === 9 && PRODUCT_COLOR.slice(0, 2)) ||
+        (setIndex === 10 && PRODUCT_COLOR.slice(1, 3)) ||
+        (setIndex === 11 && PRODUCT_COLOR.slice(2, 4)) ||
+        (setIndex === 12 && PRODUCT_COLOR.slice(3, 6)) ||
+        (setIndex === 13 && PRODUCT_COLOR.slice(4, 6)) ||
+        (setIndex === 14 && PRODUCT_COLOR.slice(5, 7)) ||
+        (setIndex === 15 && PRODUCT_COLOR.slice(6, 8)) ||
+        (setIndex === 16 && PRODUCT_COLOR.slice(7, 9)) ||
 
         PRODUCT_COLOR,
       status: sample(['sale', 'new', '', '']),

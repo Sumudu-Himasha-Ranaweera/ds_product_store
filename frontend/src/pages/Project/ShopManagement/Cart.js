@@ -12,13 +12,15 @@ import Page from '../../../components/Page';
 import Scrollbar from '../../../components/Scrollbar';
 import SearchNotFound from '../../../components/SearchNotFound';
 import { ItemListHead } from '../../../sections/@dashboard/item';
+import { makeStyles } from "@material-ui/core/styles";
 
 
 const TABLE_HEAD = [
     { id: 'name', label: 'Name', alignRight: false },
     { id: 'description', label: 'Description', alignRight: false },
     { id: 'qty', label: 'Quantity', alignRight: false },
-    { id: 'price', label: 'price', alignRight: false },
+    { id: 'price', label: 'Price ($)', alignRight: false },
+    { id: 'action', label: '', alignRight: false },
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -51,6 +53,12 @@ function applySortFilter(array, comparator, query) {
 }
 
 export default function Cart({ cart, setCart }) {
+
+    const {
+        handleClickCartButton,
+        value,
+        setValue
+    } = cart
 
     const dispatch = useDispatch();
 
@@ -120,6 +128,28 @@ export default function Cart({ cart, setCart }) {
 
     sessionStorage.setItem("cartData", JSON.stringify(cart));
 
+    const useStyles = makeStyles({
+        custom: {
+            color: "#FF0000",
+            fontSize: "30px",
+            fontWeight: "bold"
+        },
+
+        root: {
+            background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+            border: 0,
+            borderRadius: 3,
+            boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+            color: "white",
+            height: 48,
+            padding: "0 30px"
+        }
+
+        });
+
+    
+    const classes = useStyles();
+
     return (
         <Page title="Product-List">
             <Container>
@@ -167,6 +197,14 @@ export default function Cart({ cart, setCart }) {
                                                 <TableCell align="left">{description}</TableCell>
                                                 <TableCell align="left">{qty}</TableCell>
                                                 <TableCell align="left">{price}</TableCell>
+
+                                                <TableCell align="left">
+                                                    {/* <Button variant="danger">Delete</Button> */}
+                                                    <Button onClick={() => handleClickCartButton(row)} className={classes.root}>
+                                                        Delete
+                                                    </Button>
+                                                </TableCell>
+
                                             </TableRow>
                                         );
                                     })}
@@ -205,9 +243,15 @@ export default function Cart({ cart, setCart }) {
                         <Typography variant="h4" gutterBottom>
                             Total Cost
                         </Typography>
-                        <Typography variant="h4" gutterBottom>
-                            {total}
+
+                        <Typography variant="h6" className={classes.custom}>
+                            $:&nbsp;&nbsp; {total}
                         </Typography>
+                                                
+                        {/* <Typography variant="h4" gutterBottom>
+                            $:&nbsp;&nbsp; {total}
+                        </Typography> */}
+
                         <Link to={"/dashboard/pay"} style={{ textDecoration: "none" }}>
                             <Button variant="contained" fullWidth to="#" startIcon={<Iconify icon="eva:paper-plane-fill" />}>
                                 Pay
