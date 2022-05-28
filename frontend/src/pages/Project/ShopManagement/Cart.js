@@ -118,6 +118,8 @@ export default function Cart({ cart, setCart }) {
 
     var total = 0;
 
+    sessionStorage.setItem("cartData", JSON.stringify(cart));
+
     return (
         <Page title="Product-List">
             <Container>

@@ -7,6 +7,8 @@ import { getItems } from "../../../actions/item.action";
 import Page from '../../../components/Page';
 import { ProductCartWidget, ProductFilterSidebar, ProductList, ProductSort } from '../../../sections/@dashboard/products';
 import PRODUCTS from '../../../_mock/products';
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
 
 export default function EcommerceShop(props) {
 
@@ -31,7 +33,7 @@ export default function EcommerceShop(props) {
 
   const items = useSelector((state) => state.itemReducer);
 
-  const PRODUCT_COLOR = ['#00AB55', '#000000', '#FFFFFF', '#FFC0CB', '#FF4842', '#1890FF', '#94D82D', '#FFC107'];
+  const PRODUCT_COLOR = ['#00AB55', '#000000', '#FFFFFF', '#FFC0CB', '#FF4842', '#1890FF', '#94D82D', '#FFC107', '#0909FF'];
 
   const products = items.map((item, index) => {
     const setIndex = index + 1;
@@ -69,12 +71,21 @@ export default function EcommerceShop(props) {
     setOpenFilter(false);
   };
 
+  const Div = styled('div')(({ theme }) => ({
+    ...theme.typography.button,
+    backgroundColor: '#f2f2f2',
+    fontSize: '35px',
+    padding: theme.spacing(1),
+  }));
+
   return (
     <Page title="Products">
       <Container>
-        <Typography variant="h4" sx={{ mb: 5 }}>
+        {/* <Typography variant="h3" sx={{ mb: 4}}>
           Products
-        </Typography>
+        </Typography> */}
+
+        <Div>{"Products"}</Div>
 
         <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}>
           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
