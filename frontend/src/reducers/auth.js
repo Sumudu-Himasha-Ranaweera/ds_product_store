@@ -1,15 +1,18 @@
 
 import { FETCH_ALL } from '../constants/actionTypes.constants';
+import { authenticate, logout } from '../pages/Project/UserManagement/Session';
 
 const authReducer = (state = { authData: null, users: [] }, action) => {
     switch (action.type) {
         case 'AUTH':
             console.log("came")
-            localStorage.setItem('profile', JSON.stringify({ ...action?.data }))
+            authenticate(action?.data)
+            // localStorage.setItem('profile', JSON.stringify({ ...action?.data }))
 
             return { ...state, authData: action?.data }
         case 'LOGOUT':
-            localStorage.clear()
+            // localStorage.clear()
+            logout()
 
             return { ...state, authData: null }
         case FETCH_ALL:

@@ -27,7 +27,7 @@ export default function ItemUpdateForm(props) {
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    const userDataLocal = JSON.parse(localStorage.getItem('profile'));
+    const userDataLocal = JSON.parse(sessionStorage.getItem('token'));
     if (userDataLocal) {
       setUserData(userDataLocal);
     }

@@ -28,10 +28,10 @@ app.use('/item', itemRoutes);
 app.use('/payment', paymentRoutes);
 
 
-db.sequelize.sync();
-// db.sequelize.sync({ force: true }).then(() => {
-//     console.log("Drop and re-sync db.");
-// });
+// db.sequelize.sync();
+db.sequelize.sync({ force: true }).then(() => {
+    console.log("Drop and re-sync db.");
+});
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

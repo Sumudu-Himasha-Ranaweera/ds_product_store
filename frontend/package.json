@@ -3,7 +3,7 @@
   "author": "Janith Gamage",
   "license": "MIT",
   "version": "1.4.0",
-  "private": true,
+  "private": true, 
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
