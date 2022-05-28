@@ -1,18 +1,19 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { BaseOptionChartStyle } from './components/chart/BaseOptionChart';
 import ScrollToTop from './components/ScrollToTop';
 import DashboardLayout from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
+import Blog from './pages/Blog';
 import DashboardApp from './pages/DashboardApp';
+import NotFound from './pages/Page404';
+import ItemManagement from './pages/Project/ItemManagement/ItemManagement';
 import PaymentManagement from './pages/Project/PaymentManagement/PaymentManagement';
+import ShopManagement from './pages/Project/ShopManagement/ShopManagement';
 import Login from './pages/Project/UserManagement/Login';
 import Register from './pages/Project/UserManagement/Register';
-import ThemeProvider from './theme';
-import NotFound from './pages/Page404';
-import PrivateRoute from './PrivateRoutes';
 import UserManagement from './pages/Project/UserManagement/UserManagement';
-import ItemManagement from './pages/Project/ItemManagement/ItemManagement';
-import ShopManagement from './pages/Project/ShopManagement/ShopManagement';
+import PrivateRoute from './PrivateRoutes';
+import ThemeProvider from './theme';
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
             <Route path='item-management' element={<ItemManagement />} />
             <Route path='shop-management' element={<ShopManagement />} />
             <Route path='payment-management' element={<PaymentManagement />} />
+            {/* <Route path='blog' element={<Blog />} /> */}
             <Route path='*' element={<Navigate to='/404' />} />
           </Route>
           <Route path='*' element={<Navigate to='/404' replace />} />

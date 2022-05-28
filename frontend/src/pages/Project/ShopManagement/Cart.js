@@ -4,7 +4,7 @@ import {
     TablePagination, TableRow, Typography
 } from '@mui/material';
 import { filter } from 'lodash';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
 import Iconify from '../../../components/Iconify';
@@ -117,6 +117,7 @@ export default function Cart({ cart, setCart }) {
     const isUserNotFound = filteredUsers.length === 0;
 
     var total = 0;
+    sessionStorage.setItem("cartData", JSON.stringify(cart))
 
     return (
         <Page title="Product-List">

@@ -1,17 +1,15 @@
 import {
     Card, Container, Stack, Typography
 } from '@mui/material';
-import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormLabel from '@mui/material/FormLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import Page from '../../../components/Page';
 import { PaymentCardForm, PaymentGateway, PaymentPhoneForm } from "./Form";
+import PaymentInvoice from './PaymentInvoice';
 
 
 const ContentStyle = styled('div')(({ theme }) => ({
@@ -21,9 +19,16 @@ const ContentStyle = styled('div')(({ theme }) => ({
 }));
 
 
-export default function Payment() {
+export default function Payment(props) {
 
-    const [value, setValue] = React.useState('phone');
+    const {
+        cartData,
+        setCartData,
+        userData,
+        setUserData
+    } = props
+
+    const [value, setValue] = React.useState('online');
     const [error, setError] = React.useState(false);
     const [helperText, setHelperText] = React.useState('Choose wisely');
 
@@ -42,43 +47,45 @@ export default function Payment() {
                         Payment
                     </Typography>
                 </Stack>
-                {/* <Card>
-                    <Container maxWidth="md">
-                        <ContentStyle>
-                            <Typography sx={{ color: 'text.secondary', mb: 5 }}>Select a Payment Method .</Typography>
-                        </ContentStyle>
-                    </Container>
-                </Card> */}
-                <Card style={{ marginBottom: "10%" }}>
-                    <Container maxWidth="md">
-                        <ContentStyle>
-                            <PaymentGateway />
-                        </ContentStyle>
-                    </Container>
-                </Card>
-                <Card>
-                    <Container maxWidth="md">
-                        <ContentStyle>
-                            <form style={{ marginBottom: "20px" }}>
-                                <FormControl sx={{ m: 1 }} error={error} variant="standard">
-                                    <RadioGroup
-                                        aria-labelledby="demo-error-radios"
-                                        name="quiz"
-                                        value={value}
-                                        onChange={handleRadioChange}
-                                    >
-                                        <div style={{ display: 'flex' }}>
-                                            <FormControlLabel value="card" control={<Radio />} label="Card Payment" />
-                                            <FormControlLabel value="phone" control={<Radio />} label="Phone Payment" />
-                                        </div>
-                                    </RadioGroup>
-                                </FormControl>
-                            </form>
-                            <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter Payment details below.</Typography>
-                            {value == "card" ? <PaymentCardForm /> : <PaymentPhoneForm />}
-                        </ContentStyle>
-                    </Container>
-                </Card>
+                <div style={{ display: "flex", direction: "row", marginTop: "2%" }}>
+                    <div style={{ flex: "2", marginRight: "2%" }}>
+                        <Card>
+                            <Container maxWidth="md">
+                                <ContentStyle>
+                                    <form style={{ marginBottom: "20px" }}>
+                                        <FormControl sx={{ m: 1 }} error={error} variant="standard">
+                                            <RadioGroup
+                                                aria-labelledby="demo-error-radios"
+                                                name="quiz"
+                                                value={value}
+                                                onChange={handleRadioChange}
+                                            >
+                                                <div style={{ display: 'flex' }}>
+                                                    <FormControlLabel value="card" control={<Radio />} label="Card Payment" />
+                                                    <FormControlLabel value="phone" control={<Radio />} label="Phone Payment" />
+                                                    <FormControlLabel value="online" control={<Radio />} label="Online Payment" />
+                                                </div>
+                                            </RadioGroup>
+                                        </FormControl>
+                                    </form>
+                                    <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter Payment details below.</Typography>
+                                    {value == "card" ? <PaymentCardForm /> : ""}
+                                    {value == "phone" ? <PaymentPhoneForm /> : ""}
+                                    {value == "online" ? <PaymentGateway /> : ""}
+                                </ContentStyle>
+                            </Container>
+                        </Card>
+                    </div>
+                    <div style={{ flex: "1" }}>
+                        <Card>
+                            <Container maxWidth="md">
+                                <ContentStyle>
+                                    <PaymentInvoice />
+                                </ContentStyle>
+                            </Container>
+                        </Card>
+                    </div>
+                </div>
             </Container>
         </Page>
     );

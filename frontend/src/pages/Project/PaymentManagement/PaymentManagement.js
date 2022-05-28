@@ -2,10 +2,11 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
-import Page from '../../../components/Page';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import Payment from "./Payment"
+import Page from '../../../components/Page';
+import Invoice from './Invoice';
+import Payment from "./Payment";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -47,6 +48,19 @@ export default function PaymentManagement() {
         setValue(newValue);
     };
 
+    const [cartData, setCartData] = React.useState([])
+    const [userData, setUserData] = React.useState(null)
+
+    React.useEffect(() => {
+        try {
+            setCartData(JSON.parse(sessionStorage.getItem("cartData")))
+            setUserData(JSON.parse(sessionStorage.getItem("token")))
+
+        } catch (error) {
+            console.log(error)
+        }
+    }, [])
+
     return (
         <Page title="Payment Management">
             <Box sx={{ width: '100%' }}>
@@ -58,10 +72,15 @@ export default function PaymentManagement() {
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
-                    <Payment />
+                    <Payment
+                        cartData={cartData}
+                        setCartData={setCartData}
+                        userData={userData}
+                        setUserData={setUserData}
+                    />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <h1>Invoice Page</h1>
+                    <Invoice />
                 </TabPanel>
                 {/* <TabPanel value={value} index={2}>
                 <Cart cart={cart} setCart={setCart} />

@@ -1,3 +1,4 @@
+import { LoadingButton } from "@mui/lab";
 import { useCallback } from "react";
 import useRazorpay from "react-razorpay";
 
@@ -22,18 +23,18 @@ export default function App() {
                 email: "janith1.ed@example.com",
                 contact: "+94768523525",
             },
-            //     notes: {
-            //         address: "Razorpay Corporate Office",
-            //     },
-            //     theme: {
-            //         color: "#3399cc",
-            //     },
+            // notes: {
+            //     address: "Razorpay Corporate Office",
+            // },
+            // theme: {
+            //     color: "#3399cc",
+            // },
         };
 
 
         const rzpay = new Razorpay(options);
         rzpay.on("payment.success", function (response) {
-            alert(response); 
+            alert(response);
         });
 
         rzpay.on("payment.failed", function (response) {
@@ -45,13 +46,19 @@ export default function App() {
             alert(response.error.metadata.order_id);
             alert(response.error.metadata.payment_id);
         });
-        
+
         rzpay.open();
     }, [Razorpay]);
 
     return (
-        <div className="App">
-            <button onClick={handlePayment}>Click</button>
+        // <div className="App">
+        //     <button onClick={handlePayment}>Click</button>
+        // </div>
+
+        <div style={{ display: "flex", direction: "row", marginTop: "2%" }}>
+            <LoadingButton style={{ margin: "2%" }} fullWidth size="large" type="button" onClick={handlePayment} variant="contained" >
+                Online Pay
+            </LoadingButton>
         </div>
     );
 }
