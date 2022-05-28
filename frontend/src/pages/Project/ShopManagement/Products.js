@@ -38,7 +38,7 @@ export default function EcommerceShop(props) {
 
     return {
       id: item.id,
-      cover: `/static/mock-images/products/farmProduct.jpg`,
+      cover: `/static/mock-images/fruits/fruits_${setIndex}.jpg`,
       name: item.name,
       price: item.price,
       qty: item.qty,
@@ -48,8 +48,11 @@ export default function EcommerceShop(props) {
         (setIndex === 2 && PRODUCT_COLOR.slice(1, 3)) ||
         (setIndex === 3 && PRODUCT_COLOR.slice(2, 4)) ||
         (setIndex === 4 && PRODUCT_COLOR.slice(3, 6)) ||
-        (setIndex === 23 && PRODUCT_COLOR.slice(4, 6)) ||
-        (setIndex === 24 && PRODUCT_COLOR.slice(5, 6)) ||
+        (setIndex === 5 && PRODUCT_COLOR.slice(4, 6)) ||
+        (setIndex === 6 && PRODUCT_COLOR.slice(5, 7)) ||
+        (setIndex === 7 && PRODUCT_COLOR.slice(6, 8)) ||
+        (setIndex === 8 && PRODUCT_COLOR.slice(7, 9)) ||
+
         PRODUCT_COLOR,
       status: sample(['sale', 'new', '', '']),
     };
