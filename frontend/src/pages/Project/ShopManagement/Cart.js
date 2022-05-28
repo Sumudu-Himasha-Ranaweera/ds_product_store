@@ -52,13 +52,21 @@ function applySortFilter(array, comparator, query) {
     return stabilizedThis.map((el) => el[0]);
 }
 
-export default function Cart({ cart, setCart }) {
+export default function Cart(props) {
+
+    // const {
+    //     handleClickCartButton,
+    //     value,
+    //     setValue
+    // } = cart
 
     const {
-        handleClickCartButton,
-        value,
-        setValue
-    } = cart
+        cart,
+        setCart
+
+    } = props
+
+
 
     const dispatch = useDispatch();
 
@@ -136,19 +144,25 @@ export default function Cart({ cart, setCart }) {
         },
 
         root: {
-            background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-            border: 0,
-            borderRadius: 3,
-            boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-            color: "white",
-            height: 48,
-            padding: "0 30px"
+            // background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+            // border: 0,
+            // borderRadius: 3,
+            // boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+            // color: "white",
+            // height: 48,
+            // padding: "0 30px"
         }
 
-        });
+    });
 
-    
+
     const classes = useStyles();
+
+    const handleRemoveItem = (value) => {
+        console.log(value)
+        const id = value.id
+        setCart(cart.filter(item => item.id !== id));
+    }
 
     return (
         <Page title="Product-List">
@@ -200,7 +214,7 @@ export default function Cart({ cart, setCart }) {
 
                                                 <TableCell align="left">
                                                     {/* <Button variant="danger">Delete</Button> */}
-                                                    <Button onClick={() => handleClickCartButton(row)} className={classes.root}>
+                                                    <Button onClick={() => handleRemoveItem(row)} className={classes.root}>
                                                         Delete
                                                     </Button>
                                                 </TableCell>
@@ -245,9 +259,9 @@ export default function Cart({ cart, setCart }) {
                         </Typography>
 
                         <Typography variant="h6" className={classes.custom}>
-                            $:&nbsp;&nbsp; {total}
+                            LKR:&nbsp;&nbsp; {total}
                         </Typography>
-                                                
+
                         {/* <Typography variant="h4" gutterBottom>
                             $:&nbsp;&nbsp; {total}
                         </Typography> */}

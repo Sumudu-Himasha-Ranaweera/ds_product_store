@@ -44,6 +44,7 @@ export default function EcommerceShop(props) {
       name: item.name,
       price: item.price,
       qty: item.qty,
+      desc: item.description,
       priceSale: setIndex % 3 ? null : faker.datatype.number({ min: 19, max: 29, precision: 0.01 }),
       colors:
         (setIndex === 1 && PRODUCT_COLOR.slice(0, 2)) ||

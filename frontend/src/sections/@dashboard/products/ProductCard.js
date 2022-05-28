@@ -26,7 +26,7 @@ ShopProductCard.propTypes = {
 };
 
 export default function ShopProductCard({ product }) {
-  const { name, cover, price, colors, status, qty } = product;
+  const { name, cover, price, colors, status, qty, desc } = product;
 
   return (
     <Card>
@@ -70,9 +70,16 @@ export default function ShopProductCard({ product }) {
             >
 
             </Typography>
-
             &nbsp;
             {fCurrency(price)}
+          </Typography>
+        </Stack>
+        <Stack direction="column" >
+          <Typography variant="h6">
+            Description
+          </Typography>
+          <Typography variant="subtitle1">
+            {desc}
           </Typography>
         </Stack>
       </Stack>
