@@ -267,7 +267,7 @@ export default function Cart(props) {
                             $:&nbsp;&nbsp; {total}
                         </Typography> */}
 
-                        <Link to={"/dashboard/pay"} style={{ textDecoration: "none" }}>
+                        <Link to={"/dashboard/payment-management"} style={{ textDecoration: "none" }}>
                             <Button variant="contained" fullWidth to="#" startIcon={<Iconify icon="eva:paper-plane-fill" />}>
                                 Pay
                             </Button>

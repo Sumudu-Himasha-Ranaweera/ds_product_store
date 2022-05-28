@@ -1,7 +1,7 @@
 export const dbConfig = {
     HOST: "localhost",
     USER: "root",
-    PASSWORD: "26012016",
+    PASSWORD: "151217",
     DB: "farmerPortal",
     dialect: "mysql",
     pool: {
