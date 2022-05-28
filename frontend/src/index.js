@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import 'simplebar/src/simplebar.css';
 import App from './App';
 import reducers from './reducers';
+import '@progress/kendo-theme-default/dist/all.css';
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 

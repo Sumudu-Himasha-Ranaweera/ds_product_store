@@ -1,7 +1,7 @@
 //save login response > (user's name and token) to session storage
 export const authenticate = (response) => {
     if (window !== 'undefined') {
-        // console.log('authenticate', response)
+        // console.log('authenticate', response) 
         sessionStorage.setItem('token', JSON.stringify(response));
         sessionStorage.setItem('userId', JSON.stringify(response.result.id));
     }
@@ -38,6 +38,8 @@ export const logout = next => {
     if (window !== 'undefined') {
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('userId');
+        sessionStorage.removeItem('cartData');
+
     }
     // next();
 };
