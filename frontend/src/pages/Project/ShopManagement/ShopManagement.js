@@ -52,6 +52,14 @@ export default function ShopManagement() {
     const [cart, setCart] = React.useState([])
 
     const handleClickCartButton = (item) => {
+
+        const id = item.id
+        const exist = cart.filter(item => item.id !== id)
+
+        console.log(exist)
+        if (exist == null) {
+            console.log("test1")
+        }
         cart.push(item)
         // console.log(cart)
         // console.log("test" + cart.length)
