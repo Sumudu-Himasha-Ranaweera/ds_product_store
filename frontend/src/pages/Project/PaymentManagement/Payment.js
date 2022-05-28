@@ -11,7 +11,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import Page from '../../../components/Page';
-import { PaymentCardForm, PaymentPhoneForm } from "./Form";
+import { PaymentCardForm, PaymentGateway, PaymentPhoneForm } from "./Form";
 
 
 const ContentStyle = styled('div')(({ theme }) => ({
@@ -49,6 +49,13 @@ export default function Payment() {
                         </ContentStyle>
                     </Container>
                 </Card> */}
+                <Card style={{ marginBottom: "10%" }}>
+                    <Container maxWidth="md">
+                        <ContentStyle>
+                            <PaymentGateway />
+                        </ContentStyle>
+                    </Container>
+                </Card>
                 <Card>
                     <Container maxWidth="md">
                         <ContentStyle>
