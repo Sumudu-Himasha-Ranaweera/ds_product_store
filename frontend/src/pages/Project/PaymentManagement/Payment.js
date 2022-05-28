@@ -47,45 +47,32 @@ export default function Payment(props) {
                         Payment
                     </Typography>
                 </Stack>
-                <div style={{ display: "flex", direction: "row", marginTop: "2%" }}>
-                    <div style={{ flex: "2", marginRight: "2%" }}>
-                        <Card>
-                            <Container maxWidth="md">
-                                <ContentStyle>
-                                    <form style={{ marginBottom: "20px" }}>
-                                        <FormControl sx={{ m: 1 }} error={error} variant="standard">
-                                            <RadioGroup
-                                                aria-labelledby="demo-error-radios"
-                                                name="quiz"
-                                                value={value}
-                                                onChange={handleRadioChange}
-                                            >
-                                                <div style={{ display: 'flex' }}>
-                                                    <FormControlLabel value="card" control={<Radio />} label="Card Payment" />
-                                                    <FormControlLabel value="phone" control={<Radio />} label="Phone Payment" />
-                                                    <FormControlLabel value="online" control={<Radio />} label="Online Payment" />
-                                                </div>
-                                            </RadioGroup>
-                                        </FormControl>
-                                    </form>
-                                    <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter Payment details below.</Typography>
-                                    {value == "card" ? <PaymentCardForm /> : ""}
-                                    {value == "phone" ? <PaymentPhoneForm /> : ""}
-                                    {value == "online" ? <PaymentGateway /> : ""}
-                                </ContentStyle>
-                            </Container>
-                        </Card>
-                    </div>
-                    <div style={{ flex: "1" }}>
-                        <Card>
-                            <Container maxWidth="md">
-                                <ContentStyle>
-                                    <PaymentInvoice />
-                                </ContentStyle>
-                            </Container>
-                        </Card>
-                    </div>
-                </div>
+                <Card>
+                    <Container maxWidth="md">
+                        <ContentStyle>
+                            <form style={{ marginBottom: "20px" }}>
+                                <FormControl sx={{ m: 1 }} error={error} variant="standard">
+                                    <RadioGroup
+                                        aria-labelledby="demo-error-radios"
+                                        name="quiz"
+                                        value={value}
+                                        onChange={handleRadioChange}
+                                    >
+                                        <div style={{ display: 'flex' }}>
+                                            <FormControlLabel value="card" control={<Radio />} label="Card Payment" />
+                                            <FormControlLabel value="phone" control={<Radio />} label="Phone Payment" />
+                                            <FormControlLabel value="online" control={<Radio />} label="Online Payment" />
+                                        </div>
+                                    </RadioGroup>
+                                </FormControl>
+                            </form>
+                            <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter Payment details below.</Typography>
+                            {value == "card" ? <PaymentCardForm /> : ""}
+                            {value == "phone" ? <PaymentPhoneForm /> : ""}
+                            {value == "online" ? <PaymentGateway /> : ""}
+                        </ContentStyle>
+                    </Container>
+                </Card>
             </Container>
         </Page>
     );

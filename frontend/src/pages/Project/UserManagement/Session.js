@@ -38,6 +38,8 @@ export const logout = next => {
     if (window !== 'undefined') {
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('userId');
+        sessionStorage.removeItem('cartData');
+
     }
     // next();
 };

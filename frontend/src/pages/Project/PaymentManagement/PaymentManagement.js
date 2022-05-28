@@ -59,28 +59,37 @@ export default function PaymentManagement() {
         } catch (error) {
             console.log(error)
         }
-    }, [])
+    }, []) 
 
     return (
         <Page title="Payment Management">
             <Box sx={{ width: '100%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                        <Tab label="Payment" {...a11yProps(0)} />
-                        <Tab label="Invoice" {...a11yProps(1)} />
+                        <Tab label="Invoice" {...a11yProps(0)} />
+                        <Tab label="Payment" {...a11yProps(1)} />
                         {/* <Tab label="Cart" {...a11yProps(2)} /> */}
                     </Tabs>
                 </Box>
-                <TabPanel value={value} index={0}>
+                <TabPanel value={value} index={0}> 
+                    <Invoice
+                        cartData={cartData}
+                        setCartData={setCartData}
+                        userData={userData}
+                        setUserData={setUserData}
+                        value={value}
+                        setValue={setValue}
+                    />
+                </TabPanel>
+                <TabPanel value={value} index={1}>
                     <Payment
                         cartData={cartData}
                         setCartData={setCartData}
                         userData={userData}
                         setUserData={setUserData}
-                    />
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <Invoice />
+                        value={value}
+                        setValue={setValue}
+                    />s
                 </TabPanel>
                 {/* <TabPanel value={value} index={2}>
                 <Cart cart={cart} setCart={setCart} />
