@@ -12,8 +12,9 @@ export const getPayments = () => async (dispatch) => {
     }
 };
 
-export const createPayment = (Payment) => async (dispatch) => {
-    try {
+export const createPayment = (Payment, id) => async (dispatch) => {
+    try { 
+        console.log(Payment)
         const { data } = await api.createPayment(Payment);
 
         dispatch({ type: CREATE, payload: data });

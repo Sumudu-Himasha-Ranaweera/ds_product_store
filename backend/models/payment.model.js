@@ -20,6 +20,9 @@ export const PaymentModal = (sequelize, Sequelize) => {
         },
         paymentType: {
             type: Sequelize.STRING,
+        },
+        paymentGatewayId: {
+            type: Sequelize.STRING,
         }
     });
     return Payment;

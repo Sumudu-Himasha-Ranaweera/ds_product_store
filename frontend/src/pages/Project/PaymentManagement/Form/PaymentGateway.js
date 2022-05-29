@@ -1,9 +1,25 @@
 import { LoadingButton } from "@mui/lab";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import useRazorpay from "react-razorpay";
+import { useDispatch } from "react-redux";
+import { createPayment } from "../../../../actions/payment.action";
 
-export default function App() {
+export default function App(props) {
+
+    const {
+        cartData,
+        setCartData,
+        userData,
+        setUserData,
+        notify,
+        setPaymentID
+    } = props
+
     const Razorpay = useRazorpay();
+
+    const [paymentDetails, setPaymentDetails] = useState(null)
+    const [rzId, setRzId] = useState(null)
+
 
     const handlePayment = useCallback(async () => {
         // const order = await createOrder(params);
@@ -17,38 +33,47 @@ export default function App() {
             // order_id: order.id,
             handler: (res) => {
                 console.log(res);
+                setRzId(res)
             },
             prefill: {
                 name: "Janith Gamage",
                 email: "janith1.ed@example.com",
                 contact: "+94768523525",
             },
-            // notes: {
-            //     address: "Razorpay Corporate Office",
-            // },
-            // theme: {
-            //     color: "#3399cc",
-            // },
+            notes: {
+                address: "Razorpay Corporate Office",
+            },
+            theme: {
+                color: "#3399cc",
+            },
         };
 
 
         const rzpay = new Razorpay(options);
-        rzpay.on("payment.success", function (response) {
-            alert(response);
-        });
 
-        rzpay.on("payment.failed", function (response) {
-            alert(response.error.code);
-            alert(response.error.description);
-            alert(response.error.source);
-            alert(response.error.step);
-            alert(response.error.reason);
-            alert(response.error.metadata.order_id);
-            alert(response.error.metadata.payment_id);
-        });
+        setPaymentDetails(rzpay.options)
 
         rzpay.open();
     }, [Razorpay]);
+
+    console.log(paymentDetails)
+    console.log(rzId)
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        try {
+            paymentDetails.paymentGatewayId = rzId.razorpay_payment_id
+            paymentDetails.buyerId = userData.result.buyerId
+            paymentDetails.paymentType = "online"
+            paymentDetails.total = paymentDetails.amount
+            dispatch(createPayment(paymentDetails));
+            setPaymentID(rzId.razorpay_payment_id)
+            notify()
+        } catch (error) {
+            console.log(error)
+        }
+    }, [rzId])
 
     return (
         // <div className="App">

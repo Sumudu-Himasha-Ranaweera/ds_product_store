@@ -14,11 +14,12 @@ export const create = (req, res) => {
     // Create a Payment
     const payment = {
         total: req.body.total,
-        cardNumber: req.body.cardNumber,
-        cardholdersName: req.body.cardholdersName,
-        cardExpiryDate: req.body.cardExpiryDate,
-        cardCvv: req.body.cardCvv,
-        phoneNumber: req.body.phoneNumber,
+        // cardNumber: req.body.cardNumber,
+        // cardholdersName: req.body.cardholdersName,
+        // cardExpiryDate: req.body.cardExpiryDate,
+        // cardCvv: req.body.cardCvv,
+        paymentGatewayId: req.body.paymentGatewayId,
+        // phoneNumber: req.body.phoneNumber,
         paymentType: req.body.paymentType,
         buyerId: req.body.buyerId
     };

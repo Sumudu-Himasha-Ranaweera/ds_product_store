@@ -10,7 +10,8 @@ import * as React from 'react';
 import Page from '../../../components/Page';
 import { PaymentCardForm, PaymentGateway, PaymentPhoneForm } from "./Form";
 import PaymentInvoice from './PaymentInvoice';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContentStyle = styled('div')(({ theme }) => ({
     margin: '5vh 0',
@@ -38,6 +39,21 @@ export default function Payment(props) {
         setHelperText(' ');
         setError(false);
     };
+
+    const [paymentID, setPaymentID] = React.useState(null)
+
+    const notify = () => {
+        toast(`${paymentID} Online order Payment Success!`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        })
+    };
+
 
     return (
         <Page title="payment">
@@ -69,10 +85,33 @@ export default function Payment(props) {
                             <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter Payment details below.</Typography>
                             {value == "card" ? <PaymentCardForm /> : ""}
                             {value == "phone" ? <PaymentPhoneForm /> : ""}
-                            {value == "online" ? <PaymentGateway /> : ""}
+                            {value == "online" ?
+                                <PaymentGateway
+                                    cartData={cartData}
+                                    setCartData={setCartData}
+                                    userData={userData}
+                                    setUserData={setUserData}
+                                    value={value}
+                                    setValue={setValue}
+                                    notify={notify}
+                                    setPaymentID={setPaymentID}
+                                /> : ""}
                         </ContentStyle>
                     </Container>
                 </Card>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
+                {/* Same as */}
+                <ToastContainer />
             </Container>
         </Page>
     );

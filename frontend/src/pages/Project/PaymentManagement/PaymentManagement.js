@@ -71,7 +71,7 @@ export default function PaymentManagement() {
                         {/* <Tab label="Cart" {...a11yProps(2)} /> */}
                     </Tabs>
                 </Box>
-                <TabPanel value={value} index={0}> 
+                <TabPanel value={value} index={0}>
                     <Invoice
                         cartData={cartData}
                         setCartData={setCartData}
